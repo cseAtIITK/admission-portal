@@ -52,3 +52,9 @@ end
 
 gem 'haml'
 gem 'haml-rails'
+
+# Bourbon for styling
+gem 'bourbon'
+gem 'neat'
+gem 'bitters'
+gem 'refills'
