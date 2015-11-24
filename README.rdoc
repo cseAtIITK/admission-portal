@@ -1,28 +1,52 @@
-== README
+= Arrive: A Rails app to manage the admissions portal.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Arrive is a rails application that manages the admission portal for
+the department of computer science and engineering at IIT
+Kanpur. Please read this document carefully if you want to hack on the
+web application.
 
-Things you may want to cover:
+Some details of the technology stack
 
-* Ruby version
+1. Ruby on Rails (obviously)
+
+2. PostgreSQL for Database
+
+
+== Installation.
+
+
+We recommend that you use a clean rails environment under rvm for
+avoiding and version mismatch problems.
 
 * System dependencies
 
-* Configuration
+We use sqlite3 database for persistance. Please install the
+appropriate package for this.
 
-* Database creation
+  $ sudo apt-get install libpg-dev
 
-* Database initialization
+* Install the latest rvm see http://rvm.io
 
-* How to run the test suite
+* Create a ruby version and appropriate gemset. The files
+  +.ruby-version+ and +.ruby-genset+ contains the version of the ruby
+  that we use for development. Even deployment uses these.
 
-* Services (job queues, cache servers, search engines, etc.)
+    $ rvm install `cat .ruby-version`
+    $ rvm gemset create `cat .ruby-gemset`
 
-* Deployment instructions
+* Install bundler
 
-* ...
+    $ gem install bundler
+    $ bundle install
 
+Now you have a rails environment that we use.  You can start a
+development server via the standardbundle exec rails server Enjoy
+hacking.
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== Setting up the postgresql database.
+
+You need to install a local postgres database server for testing. You
+also need to create a user arrive with password testing. Make sure
+that you give arrive ability to create databases. By default
+Postgresql only listens on the localhost. This is safe. You may want
+to check this out in the configuration file of postgresql.
