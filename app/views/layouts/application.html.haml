@@ -8,4 +8,11 @@
     = favicon_link_tag 'favicon.ico'
     = csrf_meta_tags
   %body
+    %header.navigation
+      .navigation-wrapper
+        %a#js-mobile-menu.navigation-menu-button MENU
+        %nav
+          %ul#js-navigation-menu.navigation-menu.show
+            %li.nav-link
+              = link_to "Admissions@CSE.IITK", root_path
     = yield
