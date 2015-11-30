@@ -22,5 +22,12 @@ module Arrive
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Add Warden middleware
+
+    config.middleware.insert_after ActionDispatch::Flash, Warden::Manager do |manager|
+      manager.default_strategies :password
+    end
+
   end
 end
