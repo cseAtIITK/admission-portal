@@ -61,3 +61,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'bitters'
 gem 'refills'
+
+
+# Warden based authentication
+gem 'warden'
