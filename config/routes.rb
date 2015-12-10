@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
 
+  # Logging in
+  get  '/login',  to: 'auth#login_form'
+  get  '/logout', to: 'auth#logout'
+  post '/login',  to: 'auth#login'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
