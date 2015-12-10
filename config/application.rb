@@ -6,6 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
 module Arrive
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -27,6 +28,7 @@ module Arrive
 
     config.middleware.insert_after ActionDispatch::Flash, Warden::Manager do |manager|
       manager.default_strategies :password
+      manager.failure_app = UnauthorizedController
     end
 
   end
