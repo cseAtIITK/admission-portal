@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :signed_in?
 
+  # Pundit stuff
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorised
+
   # Get the currently authorized user
   def current_user(*args)
     warden.user(*args)
@@ -25,6 +29,11 @@ class ApplicationController < ActionController::Base
   # Get the warden date.
   def warden
     request.env['warden']
+  end
+
+  def user_not_authorised
+    flash[:alert] = "The current credentials do not allow this action. Login as a different user."
+    redirect_to login_path
   end
 
 end

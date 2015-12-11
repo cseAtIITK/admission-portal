@@ -10,4 +10,11 @@ FactoryGirl.define do
   trait :with_email do
     email        { Faker::Internet.email }
   end
+
+  [:admin, :grader, :staff, :candidate].each do |type|
+    trait type do
+      role         { type }
+    end
+  end
+
 end
