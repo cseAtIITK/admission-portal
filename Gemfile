@@ -65,3 +65,5 @@ gem 'refills'
 
 # Warden based authentication
 gem 'warden'
+# Pundit based authorisation
+gem 'pundit'
