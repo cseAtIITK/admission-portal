@@ -1,5 +1,7 @@
 = Arrive: A Rails app to manage the admissions portal.
 
+{<img src="https://travis-ci.org/cseAtIITK/admission-portal.svg" alt="Build Status" />}[https://travis-ci.org/cseAtIITK/admission-portal]
+
 Arrive is a rails application that manages the admission portal for
 the department of computer science and engineering at IIT
 Kanpur. Please read this document carefully if you want to hack on the
