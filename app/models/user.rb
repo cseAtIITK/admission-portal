@@ -16,6 +16,24 @@ class User < ActiveRecord::Base
                :candidate # Finally the candidates.
              ]
 
+  # Role predicates
+
+  def admin?
+    self.role == 'admin'
+  end
+
+  def candidate?
+    self.role == 'candidate'
+  end
+
+  def grader?
+    self.role == 'grader'
+  end
+
+  def staff?
+    self.role == 'staff'
+  end
+
 
   def set_password_if_required
     if self.password_digest.blank?
