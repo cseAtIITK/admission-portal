@@ -32,10 +32,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'bcrypt'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'byebug'
@@ -58,3 +61,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'bitters'
 gem 'refills'
+
+
+# Warden based authentication
+gem 'warden'

@@ -1,0 +1,13 @@
+// Place all the styles related to the auth controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+form.login {
+    @include outer-container;
+    margin-top: 10%;
+    fieldset {
+	@include span-columns(8);
+	@include shift(2);
+    }
+
+}

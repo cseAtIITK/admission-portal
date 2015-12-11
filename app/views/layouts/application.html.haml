@@ -15,4 +15,9 @@
           %ul#js-navigation-menu.navigation-menu.show
             %li.nav-link
               = link_to "Admissions@CSE.IITK", root_path
+        - if signed_in?
+          = "Welcome #{current_user.name}"
+          = link_to "Sign out", logout_path, class: 'sign-up'
+        - else
+          = link_to "Sign in", login_path, class: 'sign-up'
     = yield
