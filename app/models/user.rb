@@ -47,4 +47,18 @@ class User < ActiveRecord::Base
     return pass
   end
 
+  def change_password(old_password, new_password, confirm_password)
+
+    # Check if the correct password is given.
+    return false unless self.authenticate(old_password)
+    # Check if new password and confirmed password match
+    return false unless new_password == confirm_password
+
+
+    self.password              = new_password
+    self.password_confirmation = confirm_password
+    self.save
+
+  end
+
 end
