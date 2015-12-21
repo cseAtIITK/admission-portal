@@ -22,8 +22,8 @@ avoiding and version mismatch problems.
 
 * System dependencies
 
-We use sqlite3 database for persistance. Please install the
-appropriate package for this.
+We use postgres for persistance. Please install the appropriate
+package for this.
 
   $ sudo apt-get install libpg-dev
 
