@@ -1,5 +1,17 @@
 require 'rails_helper'
 
+RSpec::Matchers.define :authenticate_with do |pass|
+  match do |user|
+    user.authenticate(pass)
+  end
+end
+
+RSpec::Matchers.define :change_password_with do |old,new,confirm|
+  match do |user|
+    user.change_password(old,new,confirm)
+  end
+end
+
 RSpec.describe User, type: :model do
   context "Validation" do
     it "has a valid factory" do
@@ -18,39 +30,46 @@ RSpec.describe User, type: :model do
       expect(FactoryGirl.build(:user, username: user.username)).not_to be_valid
     end
 
-    let!(:candidate) { FactoryGirl.create(:user, :with_email) }
+    let(:candidate) { FactoryGirl.create(:user, :with_email) }
 
     it "is invalid if email is repeated" do
       expect(FactoryGirl.build(:user, email: candidate.email)).not_to be_valid
     end
   end
 
-  context "Password authentication" do
-    let!(:password)       { Faker::Internet.password }
-    let!(:new_password)   { Faker::Internet.password }
-    let!(:wrong_password) { Faker::Internet.password }
+  describe "Password management" do
+    let(:password)       { Faker::Internet.password }
+    let(:new_password)   { Faker::Internet.password }
+    let(:wrong_password) { Faker::Internet.password }
 
-    let(:user)            { FactoryGirl.create(:user, password: password) }
+    subject      { FactoryGirl.create(:user, password: password) }
 
-    it "authenticates with the correct password" do
-      expect(user.authenticate(password)).to be_truthy
+    context "#authenticate" do
+      it "authenticates with correct password" do
+        is_expected.to authenticate_with(password)
+      end
+
+      it "does not authenticate with wrong password" do
+        is_expected.not_to authenticate_with(wrong_password)
+      end
     end
 
-    it "does not authenticate with wrong password" do
-      expect(user.authenticate(wrong_password)).to be false
-    end
 
-    it "does not allow changing password with incorrect password" do
-      expect(user.change_password(wrong_password, new_password, new_password)).to be false
-    end
+    context "#change_password" do
+      it "does not change the password if incorrect password is supplied" do
+        is_expected.not_to change_password_with(wrong_password, new_password, new_password)
+        is_expected.to authenticate_with(password)
+      end
 
-    it "does not allow changing password with incorrect confirm password" do
-      expect(user.change_password(password, new_password, wrong_password)).to be false
-    end
+      it "does not change the password if incorrect confirmation is supplied" do
+        is_expected.not_to change_password_with(password, new_password, wrong_password)
+        is_expected.to authenticate_with(password)
+      end
 
-    it "allows changing password" do
-      expect(user.change_password(password, new_password, new_password)).to be_truthy
+      it "changes password with correct password and confirmation" do
+        is_expected.to change_password_with(password, new_password, new_password)
+        is_expected.to authenticate_with(new_password)
+      end
     end
-
   end
 end
