@@ -5,7 +5,7 @@ class AuthController < ApplicationController
 
   def login
     sign_in
-    redirect_to root_path and return
+    redirect_back_or(user_path current_user.id) and return
   end
 
   def logout
