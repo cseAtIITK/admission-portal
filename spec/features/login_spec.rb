@@ -40,4 +40,6 @@ RSpec.describe "the login process", type: :feature do
     expect(page).to have_content 'Unable to login'
   end
 
+  pending "add some tests for friendly forwarding in #{__FILE__}"
+
 end
